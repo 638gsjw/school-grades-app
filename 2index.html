@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>نتيجة الطالب - تصميم مفضل الشرعبي</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff8dc;
+      color: #222;
+      text-align: right;
+      direction: rtl;
+      padding: 30px;
+    }
+    input {
+      width: 200px;
+      padding: 5px;
+      margin: 5px;
+    }
+    button {
+      background-color: goldenrod;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 20px;
+      border: 2px dashed goldenrod;
+      padding: 15px;
+      background-color: #fffdf4;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>برنامج حساب النتيجة - تصميم مفضل الشرعبي 💛</h2>
+
+  <label>درجة القرآن: <input type="number" class="mark"></label><br>
+  <label>درجة الإسلامية: <input type="number" class="mark"></label><br>
+  <label>درجة العربية: <input type="number" class="mark"></label><br>
+  <label>درجة الإنجليزية: <input type="number" class="mark"></label><br>
+  <label>درجة الرياضيات: <input type="number" class="mark"></label><br>
+  <label>درجة الفيزياء: <input type="number" class="mark"></label><br>
+  <label>درجة الكيمياء: <input type="number" class="mark"></label><br>
+  <label>درجة الأحياء: <input type="number" class="mark"></label><br>
+
+  <button onclick="calculate()">احسب النتيجة</button>
+
+  <div class="result" id="resultBox"></div>
+
+  <script>
+    function calculate() {
+      let inputs = document.querySelectorAll(".mark");
+      let total = 0;
+      let count = 0;
+
+      inputs.forEach(input => {
+        let val = parseFloat(input.value);
+        if (!isNaN(val)) {
+          total += val;
+          count++;
+        }
+      });
+
+      if (count === 0) {
+        document.getElementById("resultBox").innerText = "لم يتم إدخال أي درجة.";
+        return;
+      }
+
+      let average = total / count;
+      let percentage = (total / (count * 100)) * 100;
+
+      let grade = "";
+      if (average >= 90) grade = "ممتاز ⭐⭐⭐⭐⭐";
+      else if (average >= 80) grade = "جيد جداً ⭐⭐⭐⭐";
+      else if (average >= 70) grade = "جيد ⭐⭐⭐";
+      else if (average >= 60) grade = "مقبول ⭐⭐";
+      else grade = "راسب ⭐";
+
+      document.getElementById("resultBox").innerHTML = `
+        <strong>عدد المواد:</strong> ${count}<br>
+        <strong>المجموع:</strong> ${total}<br>
+        <strong>المعدل:</strong> ${average.toFixed(2)}<br>
+        <strong>النسبة:</strong> ${percentage.toFixed(2)}%<br>
+        <strong>التقدير:</strong> ${grade}
+      `;
+    }
+  </script>
+
+</body>
+</html>
